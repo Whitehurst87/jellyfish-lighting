@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JellyFish Lighting | James &amp; Company Lighting – Fresno, CA</title>
+  <meta name="description" content="Permanent outdoor LED lighting by JellyFish Lighting, professionally installed by James & Company Lighting. Over 40 years of trusted expertise in Fresno & Central Valley, CA.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #ffffff;
+      color: #333333;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+
+    /* ===== COLORS ===== */
+    :root {
+      --navy: #2b3270;
+      --navy-dark: #1e2452;
+      --gold: #c9a84c;
+      --gold-light: #d4b65e;
+      --gold-hover: #b8963f;
+      --white: #ffffff;
+      --off-white: #f7f7f7;
+      --light-gray: #f2f2f2;
+      --border-gray: #e0e0e0;
+      --text-dark: #2c2c2c;
+      --text-body: #555555;
+      --text-light: #888888;
+    }
+
+    /* ===== UTILITY ===== */
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+    .text-center { text-align: center; }
+    .accent { color: var(--gold); }
+    .section-label {
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      color: var(--navy);
+    }
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-body);
+      max-width: 620px;
+      margin: 0 auto 48px;
+      font-weight: 400;
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    @keyframes colorShift {
+      0%   { background: var(--gold); box-shadow: 0 0 10px rgba(201,168,76,0.5); }
+      14%  { background: #e74c3c; box-shadow: 0 0 10px rgba(231,76,60,0.5); }
+      28%  { background: #3498db; box-shadow: 0 0 10px rgba(52,152,219,0.5); }
+      42%  { background: #2ecc71; box-shadow: 0 0 10px rgba(46,204,113,0.5); }
+      57%  { background: #9b59b6; box-shadow: 0 0 10px rgba(155,89,182,0.5); }
+      71%  { background: #e67e22; box-shadow: 0 0 10px rgba(230,126,34,0.5); }
+      85%  { background: #1abc9c; box-shadow: 0 0 10px rgba(26,188,156,0.5); }
+      100% { background: var(--gold); box-shadow: 0 0 10px rgba(201,168,76,0.5); }
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== NAVIGATION ===== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: box-shadow 0.3s ease, background 0.3s ease;
+    }
+    .nav.scrolled {
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+      background: var(--white);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+    }
+    .nav-logo img {
+      height: 60px;
+      width: auto;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+    .nav-links a {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      color: var(--navy);
+      transition: color 0.3s;
+      text-transform: uppercase;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      background: var(--navy);
+      color: var(--white) !important;
+      padding: 11px 26px;
+      border-radius: 4px;
+      font-weight: 700 !important;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .nav-cta:hover {
+      background: var(--gold);
+      transform: translateY(-1px);
+    }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 26px;
+      height: 2.5px;
+      background: var(--navy);
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    /* ===== MOBILE NAV OVERLAY ===== */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(255,255,255,0.98);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .mobile-nav.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .mobile-nav a {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .mobile-nav a:hover { color: var(--gold); }
+    .mobile-nav-close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .mobile-nav-close svg {
+      width: 28px;
+      height: 28px;
+      stroke: var(--navy);
+      fill: none;
+      stroke-width: 2;
+    }
+
+    /* ===== NAVY BANNER BAR ===== */
+    .navy-bar {
+      background: var(--navy);
+      padding: 18px 24px;
+      text-align: center;
+    }
+    .navy-bar p {
+      color: var(--white);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin: 0;
+    }
+    .navy-bar .gold { color: var(--gold); }
+
+    /* ===== HERO WITH SLIDESHOW ===== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding: 100px 0 60px;
+    }
+
+    /* Slideshow background */
+    .hero-slideshow {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1.2s ease-in-out;
+    }
+    .hero-slide.active {
+      opacity: 1;
+    }
+    .hero-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* Dark overlay for legibility */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(
+        135deg,
+        rgba(15, 18, 45, 0.82) 0%,
+        rgba(15, 18, 45, 0.65) 40%,
+        rgba(15, 18, 45, 0.55) 100%
+      );
+    }
+
+    /* Slide indicators */
+    .hero-slide-indicators {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      display: flex;
+      gap: 10px;
+    }
+    .hero-slide-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.35);
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      padding: 0;
+    }
+    .hero-slide-dot.active {
+      background: var(--gold);
+      transform: scale(1.25);
+    }
+    .hero-slide-dot:hover {
+      background: rgba(255,255,255,0.7);
+    }
+
+    /* Hero content layout */
+    .hero-inner {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 48px;
+      align-items: center;
+    }
+
+    /* Left: text content */
+    .hero-text {
+      animation: fadeInUp 0.8s ease forwards;
+    }
+    .hero-logo {
+      margin: 0 0 28px;
+      max-width: 220px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 100px;
+      padding: 8px 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 24px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+    .hero-badge svg { flex-shrink: 0; }
+    .hero h1 {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 18px;
+      color: var(--white);
+      letter-spacing: -0.5px;
+    }
+    .hero h1 .highlight {
+      color: var(--gold);
+    }
+    .hero-subtitle {
+      font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+      color: rgba(255,255,255,0.85);
+      max-width: 520px;
+      margin: 0 0 32px;
+      font-weight: 400;
+      line-height: 1.8;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 36px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+    .hero-stat h3 {
+      font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+      font-weight: 800;
+      color: var(--gold);
+    }
+    .hero-stat p {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.6);
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+    }
+
+    /* Right: contact form in hero */
+    .hero-form-wrapper {
+      animation: fadeInUp 0.8s ease 0.2s forwards;
+      opacity: 0;
+    }
+    .hero-form-card {
+      background: rgba(255,255,255,0.97);
+      border-radius: 12px;
+      padding: 36px 32px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    .hero-form-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .hero-form-header h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .hero-form-header p {
+      font-size: 0.82rem;
+      color: var(--text-body);
+      font-weight: 400;
+    }
+    .hero-form-card .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .hero-form-card .form-group {
+      margin-bottom: 14px;
+    }
+    .hero-form-card .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+    .hero-form-card .form-group label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+      color: var(--navy);
+    }
+    .hero-form-card .form-group label .required {
+      color: var(--gold);
+    }
+    .hero-form-card .form-group input,
+    .hero-form-card .form-group textarea {
+      width: 100%;
+      background: var(--off-white);
+      border: 1px solid var(--border-gray);
+      border-radius: 6px;
+      padding: 11px 14px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 400;
+      color: var(--text-dark);
+      transition: border-color 0.3s, box-shadow 0.3s;
+      outline: none;
+    }
+    .hero-form-card .form-group input::placeholder,
+    .hero-form-card .form-group textarea::placeholder {
+      color: #b0b0b0;
+    }
+    .hero-form-card .form-group input:focus,
+    .hero-form-card .form-group textarea:focus {
+      border-color: var(--navy);
+      box-shadow: 0 0 0 3px rgba(43, 50, 112, 0.08);
+      background: var(--white);
+    }
+    .hero-form-card .form-group input.error,
+    .hero-form-card .form-group textarea.error {
+      border-color: #e74c3c;
+      box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.08);
+    }
+    .hero-form-card .form-group .error-message {
+      font-size: 0.68rem;
+      color: #e74c3c;
+      margin-top: 4px;
+      display: none;
+      font-weight: 500;
+    }
+    .hero-form-card .form-group textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+    .hero-form-card .form-submit {
+      width: 100%;
+      background: var(--navy);
+      color: var(--white);
+      padding: 14px 28px;
+      border-radius: 4px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      margin-top: 4px;
+    }
+    .hero-form-card .form-submit:hover {
+      background: var(--gold);
+      transform: translateY(-2px);
+    }
+    .hero-form-card .form-submit:active { transform: translateY(0); }
+    .hero-form-card .form-privacy {
+      text-align: center;
+      margin-top: 14px;
+      font-size: 0.68rem;
+      color: var(--text-light);
+      font-weight: 400;
+    }
+    .hero-form-card .form-privacy svg {
+      display: inline;
+      vertical-align: middle;
+      margin-right: 4px;
+    }
+    .hero-form-card .form-success {
+      display: none;
+      text-align: center;
+      padding: 30px 16px;
+    }
+    .hero-form-card .form-success.show {
+      display: block;
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    .hero-form-card .form-success svg { margin: 0 auto 16px; }
+    .hero-form-card .form-success h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--navy);
+    }
+    .hero-form-card .form-success p {
+      color: var(--text-body);
+      font-weight: 400;
+      font-size: 0.9rem;
+    }
+
+    /* ===== MOBILE STICKY CTA ===== */
+    .mobile-sticky-cta {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 998;
+      background: var(--navy);
+      padding: 12px 20px;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+    }
+    .mobile-sticky-cta a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--gold);
+      color: var(--navy);
+      padding: 14px 24px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: background 0.3s;
+    }
+    .mobile-sticky-cta a:hover {
+      background: var(--gold-light);
+    }
+    .mobile-sticky-cta a svg {
+      flex-shrink: 0;
+    }
+
+    /* ===== FEATURES SECTION ===== */
+    .features {
+      padding: 80px 0;
+      background: var(--white);
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .feature-card {
+      background: var(--white);
+      border: 1px solid var(--border-gray);
+      border-radius: 8px;
+      padding: 36px 24px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    }
+    .feature-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+      border-color: var(--gold);
+    }
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 18px;
+      background: rgba(43, 50, 112, 0.06);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .feature-icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: var(--navy);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .feature-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .feature-card p {
+      font-size: 0.9rem;
+      color: var(--text-body);
+      font-weight: 400;
+      line-height: 1.6;
+    }
+
+    /* ===== BENEFITS SECTION ===== */
+    .benefits {
+      padding: 80px 0;
+      background: var(--off-white);
+    }
+    .benefits-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+    .benefits-visual {
+      background: var(--white);
+      border: 1px solid var(--border-gray);
+      border-radius: 12px;
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 440px;
+      text-align: center;
+    }
+    .light-demo {
+      display: flex;
+      gap: 7px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .light-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      animation: colorShift 10s ease-in-out infinite;
+    }
+    .light-dot:nth-child(2)  { animation-delay: -1.2s; }
+    .light-dot:nth-child(3)  { animation-delay: -2.4s; }
+    .light-dot:nth-child(4)  { animation-delay: -3.6s; }
+    .light-dot:nth-child(5)  { animation-delay: -4.8s; }
+    .light-dot:nth-child(6)  { animation-delay: -6s; }
+    .light-dot:nth-child(7)  { animation-delay: -7.2s; }
+    .light-dot:nth-child(8)  { animation-delay: -8.4s; }
+    .light-dot:nth-child(9)  { animation-delay: -1.8s; }
+    .light-dot:nth-child(10) { animation-delay: -3s; }
+    .light-dot:nth-child(11) { animation-delay: -4.2s; }
+    .light-dot:nth-child(12) { animation-delay: -5.4s; }
+    .light-dot:nth-child(13) { animation-delay: -6.6s; }
+    .light-dot:nth-child(14) { animation-delay: -7.8s; }
+    .light-dot:nth-child(15) { animation-delay: -9s; }
+    .benefits-visual h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .benefits-visual p {
+      font-size: 0.9rem;
+      color: var(--text-body);
+      font-weight: 400;
+    }
+    .benefit-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .benefit-item {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+    }
+    .benefit-icon {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      background: rgba(43, 50, 112, 0.06);
+      border: 1px solid var(--border-gray);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .benefit-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--navy);
+      fill: none;
+      stroke-width: 1.5;
+    }
+    .benefit-item h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--navy);
+    }
+    .benefit-item p {
+      font-size: 0.88rem;
+      color: var(--text-body);
+      font-weight: 400;
+      line-height: 1.6;
+    }
+
+    /* ===== DIFFERENCE SECTION ===== */
+    .difference {
+      padding: 80px 0;
+      background: var(--white);
+    }
+    .difference-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+    }
+    .diff-card {
+      background: var(--white);
+      border: 1px solid var(--border-gray);
+      border-radius: 8px;
+      padding: 36px 32px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .diff-card:hover {
+      border-color: var(--gold);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+    }
+    .diff-card-number {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--gold);
+      margin-bottom: 10px;
+      line-height: 1;
+      opacity: 0.5;
+    }
+    .diff-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--navy);
+    }
+    .diff-card p {
+      font-size: 0.9rem;
+      color: var(--text-body);
+      font-weight: 400;
+      line-height: 1.7;
+    }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonials {
+      padding: 80px 0;
+      background: var(--off-white);
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .testimonial-card {
+      background: var(--white);
+      border: 1px solid var(--border-gray);
+      border-radius: 8px;
+      padding: 32px 28px;
+    }
+    .testimonial-stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 18px;
+    }
+    .testimonial-stars svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--gold);
+    }
+    .testimonial-card blockquote {
+      font-size: 0.92rem;
+      color: var(--text-body);
+      font-weight: 400;
+      line-height: 1.7;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .testimonial-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .testimonial-author-name {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .testimonial-author-title {
+      font-size: 0.72rem;
+      color: var(--text-light);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--navy);
+      padding: 56px 0 0;
+      color: var(--white);
+    }
+    .footer-content {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 40px;
+    }
+    .footer-brand h3 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 14px;
+    }
+    .footer-brand p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.7);
+      font-weight: 400;
+      line-height: 1.7;
+    }
+    .footer-brand .footer-contact-detail {
+      margin-top: 6px;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.85);
+    }
+    .footer-brand .footer-hours {
+      margin-top: 14px;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.6;
+    }
+    .footer-brand .footer-hours strong {
+      color: var(--white);
+      font-weight: 700;
+    }
+    .footer-links h4 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .footer-links ul {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .footer-links a {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.7);
+      font-weight: 400;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 20px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-bottom p {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.4);
+      font-weight: 400;
+    }
+    .footer-dealer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.6);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 100px;
+      padding: 6px 16px;
+    }
+    .footer-dealer-badge svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--gold);
+      fill: none;
+      stroke-width: 2;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 36px;
+        text-align: center;
+      }
+      .hero-text { text-align: center; }
+      .hero-logo { margin: 0 auto 28px; }
+      .hero-badge { margin-left: auto; margin-right: auto; }
+      .hero-subtitle { margin-left: auto; margin-right: auto; }
+      .hero-stats { justify-content: center; }
+      .hero-form-wrapper { max-width: 480px; margin: 0 auto; }
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .benefits-layout { grid-template-columns: 1fr; }
+      .benefits-visual { min-height: 280px; }
+      .footer-content { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .mobile-nav { display: flex; }
+      .mobile-sticky-cta { display: block; }
+      .hero {
+        padding: 100px 0 40px;
+        min-height: auto;
+      }
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .hero-stats {
+        flex-direction: row;
+        gap: 24px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .hero-slide-indicators { bottom: 16px; }
+      .features-grid { grid-template-columns: 1fr; }
+      .difference-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .hero-form-card .form-row { grid-template-columns: 1fr; }
+      .hero-form-card { padding: 28px 20px; }
+      .footer-content { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+      .navy-bar p { font-size: 0.68rem; letter-spacing: 2px; }
+      /* Extra bottom padding to account for sticky CTA */
+      body { padding-bottom: 72px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.7rem; }
+      .hero-badge { font-size: 0.65rem; padding: 6px 14px; }
+      .hero-logo { max-width: 180px; }
+      .nav-logo img { height: 46px; }
+      .hero-stats { gap: 16px; }
+      .hero-stat h3 { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="nav" id="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#" class="nav-logo">
+          <img src="https://localcdn.lightsamerica.com/jamesandcompanylighting.com/img/logo.png" alt="James & Company Lighting">
+        </a>
+        <div class="nav-links">
+          <a href="#features">Features</a>
+          <a href="#benefits">Benefits</a>
+          <a href="#difference">Why Us</a>
+          <a href="#testimonials">Reviews</a>
+          <a href="#contact" class="nav-cta">Free Consultation</a>
+        </div>
+        <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobileNav">
+    <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <a href="#features" class="mobile-nav-link">Features</a>
+    <a href="#benefits" class="mobile-nav-link">Benefits</a>
+    <a href="#difference" class="mobile-nav-link">Why Us</a>
+    <a href="#testimonials" class="mobile-nav-link">Reviews</a>
+    <a href="#contact" class="mobile-nav-link" style="color:var(--gold);">Free Consultation</a>
+  </div>
+
+  <!-- ===== HERO WITH SLIDESHOW ===== -->
+  <header class="hero" id="hero">
+    <!-- Slideshow Background -->
+    <div class="hero-slideshow" id="heroSlideshow">
+      <div class="hero-slide active">
+        <img src="images/hero-image-01.png" alt="Beautiful home with JellyFish Lighting installed - daytime view" loading="eager">
+      </div>
+      <div class="hero-slide">
+        <img src="images/hero-image-02.png" alt="JellyFish Lighting illuminating home at night with colorful LEDs" loading="lazy">
+      </div>
+      <div class="hero-slide">
+        <img src="images/hero-image-03.png" alt="Stunning nighttime JellyFish Lighting display on residential home" loading="lazy">
+      </div>
+      <div class="hero-slide">
+        <img src="images/hero-image-04.png" alt="Vibrant JellyFish Lighting creating festive nighttime ambiance" loading="lazy">
+      </div>
+      <div class="hero-slide">
+        <img src="images/hero-image-05.png" alt="Elegant JellyFish Lighting accent display at night" loading="lazy">
+      </div>
+    </div>
+
+    <!-- Dark overlay -->
+    <div class="hero-overlay"></div>
+
+    <!-- Slide indicators -->
+    <div class="hero-slide-indicators" id="slideIndicators">
+      <button class="hero-slide-dot active" data-slide="0" aria-label="Go to slide 1"></button>
+      <button class="hero-slide-dot" data-slide="1" aria-label="Go to slide 2"></button>
+      <button class="hero-slide-dot" data-slide="2" aria-label="Go to slide 3"></button>
+      <button class="hero-slide-dot" data-slide="3" aria-label="Go to slide 4"></button>
+      <button class="hero-slide-dot" data-slide="4" aria-label="Go to slide 5"></button>
+    </div>
+
+    <!-- Hero content: text left, form right -->
+    <div class="hero-inner">
+      <!-- Left column -->
+      <div class="hero-text">
+        <img src="https://localcdn.lightsamerica.com/jamesandcompanylighting.com/img/logo.png" alt="James & Company Lighting" class="hero-logo" style="filter: brightness(0) invert(1);">
+        <div class="hero-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+          Authorized JellyFish Lighting Dealer
+        </div>
+        <h1>Permanent Outdoor Lighting.<br><span class="highlight">Endless Possibilities.</span></h1>
+        <p class="hero-subtitle">Experience color-changing LED brilliance, professionally installed by Central Valley's most trusted lighting experts. Over 40 years of excellence, one stunning upgrade for your home.</p>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <h3>40+</h3>
+            <p>Years of Expertise</p>
+          </div>
+          <div class="hero-stat">
+            <h3>16M+</h3>
+            <p>Color Options</p>
+          </div>
+          <div class="hero-stat">
+            <h3>50K+</h3>
+            <p>Happy Homeowners</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right column: Contact Form -->
+      <div class="hero-form-wrapper" id="contact">
+        <div class="hero-form-card">
+          <div class="hero-form-header">
+            <h3>Get Your <span style="color:var(--gold);">Free</span> Consultation</h3>
+            <p>Tell us about your vision — it only takes a minute.</p>
+          </div>
+          <form id="leadForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName">First Name <span class="required">*</span></label>
+                <input type="text" id="firstName" name="firstName" placeholder="John" required>
+                <div class="error-message" id="firstNameError">Please enter your first name.</div>
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name <span class="required">*</span></label>
+                <input type="text" id="lastName" name="lastName" placeholder="Smith" required>
+                <div class="error-message" id="lastNameError">Please enter your last name.</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="address">Address <span class="required">*</span></label>
+              <input type="text" id="address" name="address" placeholder="123 Main St, Fresno, CA 93701" required>
+              <div class="error-message" id="addressError">Please enter your address.</div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Email <span class="required">*</span></label>
+                <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                <div class="error-message" id="emailError">Please enter a valid email.</div>
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone <span class="required">*</span></label>
+                <input type="tel" id="phone" name="phone" placeholder="(559) 555-0123" required>
+                <div class="error-message" id="phoneError">Please enter a valid phone.</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="goals">Lighting Goals <span class="required">*</span></label>
+              <textarea id="goals" name="goals" placeholder="I'd love permanent holiday lighting on my roofline and accent lighting for the backyard..." required></textarea>
+              <div class="error-message" id="goalsError">Please share your outdoor lighting goals.</div>
+            </div>
+            <button type="submit" class="form-submit">Get Your Free Consultation</button>
+          </form>
+          <div class="form-success" id="formSuccess">
+            <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="9 12 12 15 16 10"/></svg>
+            <h3>Thank You!</h3>
+            <p>Your consultation request has been received. A lighting expert from James &amp; Company will be in touch shortly.</p>
+          </div>
+          <p class="form-privacy">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            Your information is secure and never shared.
+          </p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== NAVY BAR ===== -->
+  <div class="navy-bar">
+    <p>Central Valley's <span class="gold">Authorized JellyFish Lighting</span> Dealer &amp; Installer</p>
+  </div>
+
+  <!-- ===== FEATURES ===== -->
+  <section class="features" id="features">
+    <div class="container text-center">
+      <p class="section-label fade-in">Perfect Illumination for Every Occasion</p>
+      <h2 class="section-title fade-in">One System. <span class="accent">Four Experiences.</span></h2>
+      <p class="section-subtitle fade-in">JellyFish Lighting adapts to your lifestyle — from elegant everyday ambiance to festive holiday displays, all controlled from your phone.</p>
+      <div class="features-grid">
+        <!-- Accent -->
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M9 18h6M10 22h4M12 2a7 7 0 017 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 01-1 1h-2a1 1 0 01-1-1v-2.26C10.19 13.47 9 11.38 9 9a7 7 0 017-7z"/></svg>
+          </div>
+          <h3>Accent Lighting</h3>
+          <p>Highlight your home's architectural features with warm whites from 2700K to 5000K. Create an inviting atmosphere every single night.</p>
+        </div>
+        <!-- Holiday -->
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <h3>Holiday Lighting</h3>
+          <p>Permanent Christmas lights that stay up year-round. No ladders, no hassle — just tap your phone and celebrate every season in style.</p>
+        </div>
+        <!-- Security -->
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Security Lighting</h3>
+          <p>Deter intruders with bright, scheduled security presets. Integrates with Alexa and Google Home for motion-triggered illumination.</p>
+        </div>
+        <!-- Smart Home -->
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          </div>
+          <h3>Smart Home Ready</h3>
+          <p>Control every light from the JellyFish app. Works with Alexa, Google Home, and Control4 — set schedules, zones, and patterns with ease.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== NAVY BAR ===== -->
+  <div class="navy-bar">
+    <p>Built to Last. <span class="gold">Designed to Impress.</span></p>
+  </div>
+
+  <!-- ===== BENEFITS ===== -->
+  <section class="benefits" id="benefits">
+    <div class="container">
+      <div class="text-center" style="margin-bottom: 48px;">
+        <p class="section-label fade-in">Premium Outdoor LED Technology</p>
+        <h2 class="section-title fade-in">The JellyFish <span class="accent">Advantage</span></h2>
+        <p class="section-subtitle fade-in">Engineered for beauty, durability, and total control — here's what sets JellyFish Lighting apart.</p>
+      </div>
+      <div class="benefits-layout">
+        <div class="benefits-visual fade-in">
+          <img src="images/jellyfish-advantage.png" alt="JellyFish Lighting - 16 Million Colors" style="width:100%; border-radius:8px; margin-bottom:20px;">
+          <h3>16 Million Colors at Your Fingertips</h3>
+          <p>Individually addressable LEDs — each light a canvas for your creativity.</p>
+        </div>
+        <div class="benefit-list">
+          <div class="benefit-item fade-in">
+            <div class="benefit-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <div>
+              <h4>Set It &amp; Forget It Scheduling</h4>
+              <p>Program nightly, weekly, holiday, and special event schedules. Your lights adapt to your life automatically.</p>
+            </div>
+          </div>
+          <div class="benefit-item fade-in">
+            <div class="benefit-icon">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            </div>
+            <div>
+              <h4>Dynamic Zoning</h4>
+              <p>Control different sections of your home independently — front porch, backyard, garage — each with its own lighting scheme.</p>
+            </div>
+          </div>
+          <div class="benefit-item fade-in">
+            <div class="benefit-icon">
+              <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <div>
+              <h4>Invisible by Day, Stunning by Night</h4>
+              <p>Color-matched track installs discreetly under eaves. No visible wires, no exterior boxes — HOA approved.</p>
+            </div>
+          </div>
+          <div class="benefit-item fade-in">
+            <div class="benefit-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <h4>IP67 Weatherproof &amp; Built Tough</h4>
+              <p>Silicone-filled casings, UV-resistant acrylic, 48V system with 16-gauge wire. UL listed with a 5-year parts warranty.</p>
+            </div>
+          </div>
+          <div class="benefit-item fade-in">
+            <div class="benefit-icon">
+              <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </div>
+            <div>
+              <h4>Energy Efficient</h4>
+              <p>Less than 1 watt per light at full brightness, fully dimmable. Brilliant illumination without the energy bill.</p>
+            </div>
+          </div>
+          <div class="benefit-item fade-in">
+            <div class="benefit-icon">
+              <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div>
+              <h4>Patented &amp; Made in the USA</h4>
+              <p>Designed, patented, and manufactured in-house by JellyFish Lighting. App and controller built entirely in the USA.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== THE JAMES & COMPANY DIFFERENCE ===== -->
+  <section class="difference" id="difference">
+    <div class="container text-center">
+      <p class="section-label fade-in">Your Trusted Local Partner</p>
+      <h2 class="section-title fade-in">The James &amp; Company <span class="accent">Difference</span></h2>
+      <p class="section-subtitle fade-in">When you choose James &amp; Company Lighting, you get more than a product — you get four decades of expertise and white-glove service.</p>
+      <div class="difference-grid">
+        <div class="diff-card fade-in">
+          <div class="diff-card-number">01</div>
+          <h3>40+ Years of Lighting Mastery</h3>
+          <p>With over four decades serving Central Valley, CA, our team brings unmatched knowledge in lighting design, consultation, wiring, and installation. We've seen every style, every challenge — and we know exactly how to deliver results.</p>
+        </div>
+        <div class="diff-card fade-in">
+          <div class="diff-card-number">02</div>
+          <h3>Expert Design Consultation</h3>
+          <p>Every project starts with a personalized consultation. We assess your home's architecture, your outdoor spaces, and your vision to create a custom JellyFish Lighting plan that's perfect for you.</p>
+        </div>
+        <div class="diff-card fade-in">
+          <div class="diff-card-number">03</div>
+          <h3>Professional Local Installation</h3>
+          <p>Our certified installation team handles everything — clean, discreet mounting with no visible wires or boxes. We guarantee a flawless finish that protects your home's aesthetics and your investment.</p>
+        </div>
+        <div class="diff-card fade-in">
+          <div class="diff-card-number">04</div>
+          <h3>Service You Can Count On</h3>
+          <p>From your first call to years after installation, we're here. Exceptional customer service isn't just a value — it's our promise. Quality, trust, and innovation in every interaction.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== NAVY BAR ===== -->
+  <div class="navy-bar">
+    <p>Trusted by <span class="gold">50,000+ Homeowners</span> Nationwide &nbsp;•&nbsp; 4.7 &#9733; Google Rating &nbsp;•&nbsp; 1,300+ Reviews</p>
+  </div>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="testimonials" id="testimonials">
+    <div class="container text-center">
+      <p class="section-label fade-in">What Homeowners Are Saying</p>
+      <h2 class="section-title fade-in">Real Reviews. <span class="accent">Real Results.</span></h2>
+      <p class="section-subtitle fade-in">See why homeowners love their JellyFish Lighting — installed by the experts at James &amp; Company.</p>
+      <div class="testimonials-grid">
+        <div class="testimonial-card fade-in">
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <blockquote>"The installation was professional, courteous, and informative. It's such a relief to have beautiful lights without the work and worry of putting them up and taking them down every year."</blockquote>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">S</div>
+            <div>
+              <div class="testimonial-author-name">Sarah R.</div>
+              <div class="testimonial-author-title">Homeowner</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card fade-in">
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <blockquote>"This is the best investment we've made! Their customer service is 5 star — they explain everything, no hidden secrets or fees. Amazing year-round lighting system."</blockquote>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">S</div>
+            <div>
+              <div class="testimonial-author-name">Staci P.</div>
+              <div class="testimonial-author-title">Homeowner</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card fade-in">
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <blockquote>"The lights can't be seen at all during the day — our HOA hasn't said a word. Now our house is festive for every holiday. We even use them nightly as security lighting."</blockquote>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">K</div>
+            <div>
+              <div class="testimonial-author-name">Kim W.</div>
+              <div class="testimonial-author-title">Homeowner</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MOBILE STICKY CTA ===== -->
+  <div class="mobile-sticky-cta" id="mobileCta">
+    <a href="#contact">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      Get Your Free Consultation
+    </a>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h3>James &amp; Company Lighting</h3>
+          <p>316 W. Fallbrook Avenue<br>Fresno, CA 93711</p>
+          <p class="footer-contact-detail">559-486-7900</p>
+          <p class="footer-contact-detail">todd@jamesco.net</p>
+          <div class="footer-hours">
+            <strong>Location Hours:</strong><br>
+            M–F 8:00 – 5:00<br>
+            Sat. By Appointment Only<br>
+            Sun. Closed
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Links</h4>
+          <ul>
+            <li><a href="https://jamesandcompanylighting.com/" target="_blank" rel="noopener">About Us</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="#features">JellyFish Features</a></li>
+            <li><a href="#benefits">Benefits</a></li>
+            <li><a href="#difference">Why Choose Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#">Lighting Consultation</a></li>
+            <li><a href="#">JellyFish Installation</a></li>
+            <li><a href="#">Wiring &amp; Electrical</a></li>
+            <li><a href="#">Lamp Repair</a></li>
+            <li><a href="https://jamesandcompanylighting.com/" target="_blank" rel="noopener">Shop Lighting</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 James &amp; Company Lighting. All rights reserved.</p>
+        <div class="footer-dealer-badge">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Authorized JellyFish Lighting Dealer
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script>
+    // === Scroll-based nav shadow ===
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // === Mobile Nav ===
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    const mobileNavClose = document.getElementById('mobileNavClose');
+    const mobileNavLinks = mobileNav.querySelectorAll('a');
+
+    hamburger.addEventListener('click', () => mobileNav.classList.add('open'));
+    mobileNavClose.addEventListener('click', () => mobileNav.classList.remove('open'));
+    mobileNavLinks.forEach(link => {
+      link.addEventListener('click', () => mobileNav.classList.remove('open'));
+    });
+
+    // === Hero Slideshow ===
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.hero-slide-dot');
+    let currentSlide = 0;
+    let slideshowInterval;
+
+    function goToSlide(index) {
+      slides[currentSlide].classList.remove('active');
+      dots[currentSlide].classList.remove('active');
+      currentSlide = index;
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+    }
+
+    function nextSlide() {
+      goToSlide((currentSlide + 1) % slides.length);
+    }
+
+    function startSlideshow() {
+      slideshowInterval = setInterval(nextSlide, 5000);
+    }
+
+    function resetSlideshow() {
+      clearInterval(slideshowInterval);
+      startSlideshow();
+    }
+
+    // Click on dots to navigate
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const slideIndex = parseInt(dot.getAttribute('data-slide'));
+        goToSlide(slideIndex);
+        resetSlideshow();
+      });
+    });
+
+    // Start auto-slideshow
+    startSlideshow();
+
+    // === Hide mobile sticky CTA when form is visible ===
+    const mobileCta = document.getElementById('mobileCta');
+    const heroFormWrapper = document.getElementById('contact');
+
+    if (mobileCta && heroFormWrapper) {
+      const ctaObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            mobileCta.style.transform = 'translateY(100%)';
+            mobileCta.style.transition = 'transform 0.3s ease';
+          } else {
+            mobileCta.style.transform = 'translateY(0)';
+            mobileCta.style.transition = 'transform 0.3s ease';
+          }
+        });
+      }, { threshold: 0.2 });
+
+      ctaObserver.observe(heroFormWrapper);
+    }
+
+    // === Fade-in on scroll (Intersection Observer) ===
+    const fadeEls = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, i * 60);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+
+    fadeEls.forEach(el => observer.observe(el));
+
+    // === Form Validation & Submission ===
+    const form = document.getElementById('leadForm');
+    const formSuccess = document.getElementById('formSuccess');
+
+    function showError(inputId, errorId) {
+      const input = document.getElementById(inputId);
+      const error = document.getElementById(errorId);
+      input.classList.add('error');
+      error.style.display = 'block';
+    }
+
+    function clearError(inputId, errorId) {
+      const input = document.getElementById(inputId);
+      const error = document.getElementById(errorId);
+      input.classList.remove('error');
+      error.style.display = 'none';
+    }
+
+    // Real-time validation clearing
+    ['firstName', 'lastName', 'address', 'email', 'phone', 'goals'].forEach(id => {
+      const el = document.getElementById(id);
+      el.addEventListener('input', () => clearError(id, id + 'Error'));
+    });
+
+    function validateEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function validatePhone(phone) {
+      const digits = phone.replace(/\D/g, '');
+      return digits.length >= 7;
+    }
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      let valid = true;
+
+      if (!document.getElementById('firstName').value.trim()) {
+        showError('firstName', 'firstNameError'); valid = false;
+      }
+      if (!document.getElementById('lastName').value.trim()) {
+        showError('lastName', 'lastNameError'); valid = false;
+      }
+      if (!document.getElementById('address').value.trim()) {
+        showError('address', 'addressError'); valid = false;
+      }
+      if (!validateEmail(document.getElementById('email').value.trim())) {
+        showError('email', 'emailError'); valid = false;
+      }
+      if (!validatePhone(document.getElementById('phone').value.trim())) {
+        showError('phone', 'phoneError'); valid = false;
+      }
+      if (!document.getElementById('goals').value.trim()) {
+        showError('goals', 'goalsError'); valid = false;
+      }
+
+      if (valid) {
+        const formData = {
+          firstName: document.getElementById('firstName').value.trim(),
+          lastName: document.getElementById('lastName').value.trim(),
+          address: document.getElementById('address').value.trim(),
+          email: document.getElementById('email').value.trim(),
+          phone: document.getElementById('phone').value.trim(),
+          goals: document.getElementById('goals').value.trim(),
+          timestamp: new Date().toISOString()
+        };
+
+        console.log('Lead Submission:', formData);
+
+        // Show success state
+        form.style.display = 'none';
+        formSuccess.classList.add('show');
+      } else {
+        const firstError = form.querySelector('.error');
+        if (firstError) {
+          firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    });
+
+    // === Phone number auto-formatting ===
+    document.getElementById('phone').addEventListener('input', function(e) {
+      let val = this.value.replace(/\D/g, '');
+      if (val.length > 10) val = val.slice(0, 10);
+      if (val.length >= 6) {
+        this.value = '(' + val.slice(0, 3) + ') ' + val.slice(3, 6) + '-' + val.slice(6);
+      } else if (val.length >= 3) {
+        this.value = '(' + val.slice(0, 3) + ') ' + val.slice(3);
+      } else if (val.length > 0) {
+        this.value = '(' + val;
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+{
+  "name": "James \u0026 Company Lighting",
+  "overview": "James \u0026 Company Lighting is a central valley, CA-based retailer and service provider, offering a curated selection of premium lighting designs for home and commercial projects. With over 40 years of experience, the company specializes in lighting consultation, wiring, installation, and lamp repair services.",
+  "websiteUrl": "https://jamesandcompanylighting.com/",
+  "brandValues": ["Quality", "Innovation", "Exceptional Customer Service", "Expert Guidance", "Trust"],
+  "visualAesthetics": ["classic professionalism", "timeless elegance", "established", "high-service", "professional clarity"],
+  "toneOfVoice": ["Professional", "Expert", "Supportive", "Inspirational"],
+  "fonts": ["montserrat"],
+  "campaigns": [{
+    "creatives": [{
+      "title": "Lighting Design Made Simple",
+      "versions": [{
+        "fileName": "resource_9hOq3oS5ruc9qwMAeavkvK.png"
+      }]
+    }, {
+      "title": "Design Consultation Experts",
+      "versions": [{
+        "fileName": "resource_8stUIr98dAE39T4eY6Nk1A.png"
+      }]
+    }, {
+      "title": "Guaranteed, Local Installation",
+      "versions": [{
+        "fileName": "resource_8ab85mJ2zOfb1Sa58KyOZ2.png"
+      }]
+    }, {
+      "title": "Fresno\u0027s Full-Service Lighting",
+      "versions": [{
+        "fileName": "resource_alBjK7eOeIgc4E9VnMq4pu.png"
+      }]
+    }]
+  }, {
+    "creatives": [{
+      "title": "The Warmth of Winter Light",
+      "versions": [{
+        "fileName": "resource_adUBt6Anr4_6ey961rKOwS.png"
+      }]
+    }, {
+      "title": "Design That Defines Your Space",
+      "versions": [{
+        "fileName": "resource_9RK3WGqsUy78PCCq9O4OW3.png"
+      }]
+    }, {
+      "title": "From Dark Corners to Defined Flow",
+      "versions": [{
+        "fileName": "resource_9pbZCGy-xAh24dh2Pgk4sh.png"
+      }]
+    }, {
+      "title": "Your Local Lighting Partner",
+      "versions": [{
+        "fileName": "resource_964wzYBlyHT2Oo7gn4MkVT.png"
+      }]
+    }]
+  }, {
+    "creatives": [{
+      "title": "Elevate Your Holiday Glow.",
+      "versions": [{
+        "fileName": "resource_bBIcYIqw6-na7ky7QJmkQi.png"
+      }]
+    }, {
+      "title": "The Perfect Centerpiece.",
+      "versions": [{
+        "fileName": "resource_a7iPKVx3D9L7p77LRp2O2v.png"
+      }]
+    }, {
+      "title": "Ambiance That Invites.",
+      "versions": [{
+        "fileName": "resource_aiZJfgyxBcj5O7YULPY4GA.png"
+      }]
+    }, {
+      "title": "Light Up the New Year.",
+      "versions": [{
+        "fileName": "resource_89motkjweXzcKHRX-LD_Ko.png"
+      }]
+    }]
+  }]
+}

@@ -1566,21 +1566,29 @@
         submitBtn.disabled = true;
         submitBtn.textContent = 'SENDING...';
 
-        // Collect form data including hidden fields
+        // Collect form data as JSON (recommended by Web3Forms)
         const formData = new FormData(form);
+        const jsonData = {};
+        formData.forEach((value, key) => { jsonData[key] = value; });
 
         fetch('https://api.web3forms.com/submit', {
           method: 'POST',
-          body: formData
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(jsonData)
         })
         .then(response => response.json())
         .then(data => {
+          console.log('Web3Forms response:', data);
           if (data.success) {
             // Show success state
             form.style.display = 'none';
             formSuccess.classList.add('show');
           } else {
             // If Web3Forms returns an error
+            console.error('Web3Forms error:', data.message || data);
             alert('Something went wrong. Please try again or call us at 559-486-7900.');
             submitBtn.disabled = false;
             submitBtn.textContent = 'GET YOUR FREE CONSULTATION';

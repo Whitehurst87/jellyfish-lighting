@@ -1075,6 +1075,10 @@
             <p>Tell us about your vision — it only takes a minute.</p>
           </div>
           <form id="leadForm" novalidate>
+            <input type="hidden" name="access_key" value="266f8065-1e97-41da-9de1-26d318352f2e">
+            <input type="hidden" name="subject" value="New JellyFish Lighting Consultation Request">
+            <input type="hidden" name="from_name" value="JellyFish Lighting Website">
+            <input type="checkbox" name="botcheck" class="hidden" style="display:none;">
             <div class="form-row">
               <div class="form-group">
                 <label for="firstName">First Name <span class="required">*</span></label>
@@ -1556,21 +1560,37 @@
       }
 
       if (valid) {
-        const formData = {
-          firstName: document.getElementById('firstName').value.trim(),
-          lastName: document.getElementById('lastName').value.trim(),
-          address: document.getElementById('address').value.trim(),
-          email: document.getElementById('email').value.trim(),
-          phone: document.getElementById('phone').value.trim(),
-          goals: document.getElementById('goals').value.trim(),
-          timestamp: new Date().toISOString()
-        };
+        // Disable submit button to prevent double submissions
+        const submitBtn = form.querySelector('.form-submit');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'SENDING...';
 
-        console.log('Lead Submission:', formData);
+        // Collect form data including hidden fields
+        const formData = new FormData(form);
 
-        // Show success state
-        form.style.display = 'none';
-        formSuccess.classList.add('show');
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            // Show success state
+            form.style.display = 'none';
+            formSuccess.classList.add('show');
+          } else {
+            // If Web3Forms returns an error
+            alert('Something went wrong. Please try again or call us at 559-486-7900.');
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'GET YOUR FREE CONSULTATION';
+          }
+        })
+        .catch(error => {
+          console.error('Form submission error:', error);
+          alert('Something went wrong. Please try again or call us at 559-486-7900.');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'GET YOUR FREE CONSULTATION';
+        });
       } else {
         const firstError = form.querySelector('.error');
         if (firstError) {
